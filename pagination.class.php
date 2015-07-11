@@ -183,14 +183,18 @@ class Pagination {
         $html = "";
         $html .= '<div class="pagination">';
         $html .= '<ul>';
-        foreach ($array_pagination as $v) {
-            if ($v == $this->linksSeparator) {
-                $html .= '<li class="disabled"><span>' . $this->linksSeparator . '</span></li>';
-            } else if (preg_match("/<b>(.*)<\/b>/i", $v)) {
-                $html .= '<li class="active"><span>' . strip_tags($v) . '</span></li>';
-            } else {
-                $html .= '<li>' . $v . '</li>';
+        if ($this->nbMaxElements) {
+            foreach ($array_pagination as $v) {
+                if ($v == $this->linksSeparator) {
+                    $html .= '<li class="disabled"><span>' . $this->linksSeparator . '</span></li>';
+                } else if (preg_match("/<b>(.*)<\/b>/i", $v)) {
+                    $html .= '<li class="active"><span>' . strip_tags($v) . '</span></li>';
+                } else {
+                    $html .= '<li>' . $v . '</li>';
+                }
             }
+        } else {
+            $html .= '<li class="active"><span>1</span></li>';
         }
         $html .= '</ul>';
         $html .= '</div>';
